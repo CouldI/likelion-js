@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+    <style>
+        .demo {
+            width: 100px;
+            height: 100px;
+            background-color: blue;
+            display: inline-block;
+            margin: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+
+        <div class="demo" :style="{backgroundColor: color, width: width + 'px'}"></div>
+        <div class="demo"></div>
+        <div class="demo"></div>
+    
+        <hr>
+        <input type="text" v-model="color">
+        <input type="text" v-model="width">
+    
+        <div>보인다</div>
+        <div v-if="show">안보인다.</div>
+    
+        <button @click="show = !show">클릭</button>
+    
+        <div v-for="ingredient in ingredients">
+            {{ingredient}}
+        </div>
+
+        <div v-for="person in persons">
+            {{person.name}}은 {{person.age}}살 이고 {{ computedColor(person.favoriteColor)}} 색을 좋아합니다.
+            <div class="demo" :style="{backgroundColor: person.favoriteColor}"></div>
+        </div>
+    </div>
+
+    
+<script>
+    new Vue({
+        el: "#app",
+        data: {
+            color: '',
+            width: 100,
+            show: true,
+            ingredients: ['milk','apple','meat','salt'],
+            persons: [
+                {name: 'John', age: 20, favoriteColor: 'gold'},
+                {name: 'Jane', age: 40, favoriteColor: 'red'},
+                {name: 'Harry', age: 24, favoriteColor: 'green'},
+                {name: 'John', age: 19, favoriteColor: 'cyan'},
+            ]
+        },
+        methods:{
+            computedColor: function(color){
+                if (color === "red"){
+                    return "빨강색"
+                } else if (color === "blue") {
+                    return "파란색"
+                } else if (color === "green") {
+                    return "초록색"
+                } else if (color === "cyan") {
+                    return "하늘색"
+                }
+            }
+        },
+        created: function() {
+            console.log('생성됨');
+        }
+    })
+
+</script>
+</body>
+</html>
